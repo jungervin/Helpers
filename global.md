@@ -26,11 +26,48 @@ namespace WpfApp1
     }
 }
 ```
-In xaml:
+### xaml:
 
 ```csharp
 ...
 xmlns:local="clr-namespace:WpfApp1"
 ...
 <TextBlock Text="{Binding Source={x:Static local:App.Global}, Path=User.Name}" />
+```
+
+### model:
+```csharp
+public class User : INotifyPropertyChanged
+    {
+
+        private bool FEnabled = false;
+        public bool Enabled
+        {
+            get { return FEnabled; }
+            set
+            {
+                FEnabled = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private String FName;
+
+        public String Name
+        {
+            get { return FName; }
+            set
+            {
+                FName = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 ```
