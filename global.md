@@ -35,7 +35,7 @@ xmlns:local="clr-namespace:WpfApp1"
 <TextBlock Text="{Binding Source={x:Static local:App.Global}, Path=User.Name}" />
 ```
 
-### model:
+### user:
 ```csharp
 public class User : INotifyPropertyChanged
     {
